@@ -1,0 +1,26 @@
+{
+  "projeto": "LinkedIn URL Finder",
+  "versao": "1.0",
+  "data_integracao": "2025-09-25T19:37:09.886911",
+  "estatisticas": {
+    "total_formandos": 160,
+    "perfis_encontrados": 160,
+    "taxa_sucesso": "100%",
+    "periodo": "2024-2025",
+    "status": "Completo"
+  },
+  "arquivos_principais": [
+    "linkedin_production.py",
+    "check_progress.py",
+    "setup_chromedriver.py",
+    "linkedin_selenium_simple.py",
+    "requirements.txt",
+    "README.md",
+    "LICENSE",
+    ".gitignore"
+  ],
+  "arquivos_dados": [
+    "linkedin_success_master.json",
+    "new_graduates.csv"
+  ]
+}

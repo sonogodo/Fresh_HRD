@@ -1,0 +1,62 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ChromeDriver
+chromedriver.exe
+chromedriver
+chromedriver-win64/
+
+# Logs
+*.log
+debug_*.html
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+
+# Session backups (if any)
+linkedin_session_*.json
+linkedin_interrupted_*.json
+
+# Large result files (optional - you might want to include the master file)
+# linkedin_success_master.json
+
+# Personal data
+# new_graduates.csv

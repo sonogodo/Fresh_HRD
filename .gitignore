@@ -1,0 +1,13 @@
+# VSCode
+.vscode/
+
+# Virtual env
+.venv/
+
+# Cache
+__pycache__/
+*.pyc
+
+# Outros
+.DS_Store
+JSONs/jobs_teste.json
