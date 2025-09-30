@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decision | Plataforma de Matchmaking</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #581c87;
+            /* Deep purple for main actions */
+            --secondary-color: #3b82f6;
+            /* Blue accent from logo */
+            --accent-color: #db2777;
+            /* Pink accent from logo */
+            --bg-color: #f8fafc;
+            /* Light gray background */
+            --card-bg-color: #ffffff;
+            --text-color: #334155;
+            --light-text-color: #64748b;
+            --border-color: #e2e8f0;
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        /* General Reset & Body Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--card-bg-color);
+            padding: 20px 40px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            /* Adjusted styling for the new logo dimensions */
+            height: 45px;
+            width: auto;
+            /* Maintain aspect ratio */
+            margin-right: 20px;
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Main Content & Layout */
+        main {
+            flex-grow: 1;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        @media (min-width: 920px) {
+            .container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .intro h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .intro p {
+            font-size: 1.1rem;
+            color: var(--light-text-color);
+            max-width: 600px;
+            margin: 10px auto 0;
+        }
+
+        /* Card Styling */
+        .card {
+            background-color: var(--card-bg-color);
+            border-radius: 12px;
+            padding: 30px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        /* Form Elements */
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            font-family: var(--font-family);
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(88, 28, 135, 0.1);
+        }
+
+        /* Custom File Input */
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.2s, background-color 0.2s;
+        }
+
+        .file-input-wrapper:hover {
+            border-color: var(--primary-color);
+            background-color: #faf5ff;
+        }
+
+        .file-input-wrapper input[type="file"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-label-text {
+            color: var(--light-text-color);
+        }
+
+        #fileName {
+            display: block;
+            margin-top: 10px;
+            font-weight: 500;
+            color: var(--accent-color);
+        }
+
+
+        /* Button */
+        .btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: 12px 20px;
+            margin-top: 20px;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        .loader {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #FFF;
+            border-bottom-color: transparent;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes rotation {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Result Area */
+        .result-container {
+            margin-top: 25px;
+        }
+
+        .result-container h4 {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        pre {
+            background: #1e293b;
+            /* Dark background for code */
+            color: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            background-color: var(--card-bg-color);
+            border-top: 1px solid var(--border-color);
+            color: var(--light-text-color);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <img src="https://static.wixstatic.com/media/f520ac_c75af83d4bb649d18abd658dec39f0a4~mv2.png/v1/fill/w_280,h_176,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/logo_decision_pequeno_home.png"
+            alt="Decision Logo" class="logo">
+        <h1>Tecnologia e Inovação</h1>
+    </header>
+
+    <main>
+        <div class="intro">
+            <h2>Plataforma de Matchmaking Inteligente</h2>
+            <p>Utilize nossos algoritmos de Machine Learning para encontrar os profissionais ideais para suas vagas.</p>
+        </div>
+
+        <div class="container">
+            <section class="card">
+                <h3>Análise de Vaga Individual</h3>
+                <form id="formVagaUnica">
+                    <label for="descricao">Descrição da Vaga</label>
+                    <textarea id="descricao" rows="5"
+                        placeholder="Cole a descrição completa da vaga aqui..."></textarea>
+                    <button type="submit" id="btnMatchVaga" class="btn">
+                        <span>Analisar Vaga</span>
+                    </button>
+                </form>
+                <div class="result-container" id="vagaResultContainer" hidden>
+                    <h4>Resultado da Análise:</h4>
+                    <pre id="vagaResult"></pre>
+                </div>
+            </section>
+
+            <section class="card">
+                <h3>Análise de Múltiplas Vagas</h3>
+                <form id="formVagasMultiplas">
+                    <label for="vagasFile">Carregar Arquivo (.json)</label>
+                    <div class="file-input-wrapper">
+                        <span class="file-label-text">Clique para selecionar um arquivo</span>
+                        <input type="file" id="vagasFile" accept=".json">
+                        <span id="fileName"></span>
+                    </div>
+                    <button type="submit" id="btnMatchVagas" class="btn">
+                        <span>Analisar Arquivo</span>
+                    </button>
+                </form>
+                <div class="result-container" id="vagasResultContainer" hidden>
+                    <h4>Resultado da Análise:</h4>
+                    <pre id="vagasResult"></pre>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2025 Decision - Tecnologia e Inovação. Todos os direitos reservados.
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Element Selectors ---
+            const formVagaUnica = document.getElementById('formVagaUnica');
+            const descricaoInput = document.getElementById('descricao');
+            const btnMatchVaga = document.getElementById('btnMatchVaga');
+            const vagaResultContainer = document.getElementById('vagaResultContainer');
+            const vagaResultPre = document.getElementById('vagaResult');
+
+            const formVagasMultiplas = document.getElementById('formVagasMultiplas');
+            const vagasFileInput = document.getElementById('vagasFile');
+            const fileNameSpan = document.getElementById('fileName');
+            const btnMatchVagas = document.getElementById('btnMatchVagas');
+            const vagasResultContainer = document.getElementById('vagasResultContainer');
+            const vagasResultPre = document.getElementById('vagasResult');
+
+            // --- UI Helper Functions ---
+            const toggleLoading = (button, isLoading) => {
+                button.disabled = isLoading;
+                const buttonText = button.querySelector('span');
+                if (isLoading) {
+                    buttonText.innerHTML = '<div class="loader"></div>Analisando...';
+                } else {
+                    buttonText.innerHTML = button.dataset.originalText;
+                }
+            };
+
+            const displayResult = (container, preElement, data) => {
+                preElement.textContent = JSON.stringify(data, null, 2);
+                container.hidden = false;
+            };
+
+            // --- Event Listeners ---
+
+            // Store original button text
+            btnMatchVaga.dataset.originalText = btnMatchVaga.querySelector('span').textContent;
+            btnMatchVagas.dataset.originalText = btnMatchVagas.querySelector('span').textContent;
+
+            // Handle single job submission
+            formVagaUnica.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const descricao = descricaoInput.value.trim();
+                if (!descricao) {
+                    alert('Por favor, insira a descrição da vaga.');
+                    return;
+                }
+
+                toggleLoading(btnMatchVaga, true);
+
+                try {
+                    const formData = new FormData();
+                    formData.append('descricao', descricao);
+
+                    const res = await fetch('/match_vaga', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (!res.ok) {
+                        throw new Error(`HTTP error! status: ${res.status}`);
+                    }
+
+                    const data = await res.json();
+                    displayResult(vagaResultContainer, vagaResultPre, data);
+
+                } catch (error) {
+                    console.error('Erro ao processar a vaga:', error);
+                    const errorData = { erro: 'Não foi possível conectar ao servidor ou processar a resposta.', detalhes: error.message };
+                    displayResult(vagaResultContainer, vagaResultPre, errorData);
+                } finally {
+                    toggleLoading(btnMatchVaga, false);
+                }
+            });
+
+            // Handle multiple jobs submission
+            vagasFileInput.addEventListener('change', () => {
+                fileNameSpan.textContent = vagasFileInput.files.length > 0 ? vagasFileInput.files[0].name : '';
+            });
+
+            formVagasMultiplas.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                if (!vagasFileInput.files.length) {
+                    alert('Por favor, selecione um arquivo JSON!');
+                    return;
+                }
+
+                toggleLoading(btnMatchVagas, true);
+
+                try {
+                    const formData = new FormData();
+                    formData.append('file', vagasFileInput.files[0]);
+
+                    const res = await fetch('/match_vagas', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (!res.ok) {
+                        throw new Error(`HTTP error! status: ${res.status}`);
+                    }
+
+                    const data = await res.json();
+                    displayResult(vagasResultContainer, vagasResultPre, data);
+
+                } catch (error) {
+                    console.error('Erro ao processar o arquivo de vagas:', error);
+                    const errorData = { erro: 'Não foi possível conectar ao servidor ou processar a resposta.', detalhes: error.message };
+                    displayResult(vagasResultContainer, vagasResultPre, errorData);
+                } finally {
+                    toggleLoading(btnMatchVagas, false);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

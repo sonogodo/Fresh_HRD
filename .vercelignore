@@ -4,8 +4,9 @@ __pycache__/
 *.log
 .venv/
 .vscode/
-*.md
 dataExploration.ipynb
 JSONs/jobs_teste.json
 JSONs/vagas_padrao.json
 Utils/
+test_api.py
+DEPLOYMENT.md
